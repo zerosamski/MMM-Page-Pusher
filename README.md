@@ -21,12 +21,13 @@ var config = {
     modules: [
         ...
         {
-            module: "MMM-Sam-Swipes",
+            module: "MMM-Page-Pusher",
             config: 
                 leftPinTrigger: 23 // Default value: 23 (GPIO numbering)
                 leftPinEcho: 24, // Default value: 24 (GPIO numbering)
                 rightPinTrigger: 20, // Default value: 20 (GPIO numbering)
                 rightPinEcho: 21, // Default value: 21 (GPIO numbering)
+                threshold: 20 // at what distance the program considers a 'push' to occur
             }
         },
         ...
