@@ -2,15 +2,21 @@
 import RPi.GPIO as GPIO
 import time
 import json
+import sys
+import re
  
 #GPIO Mode (BOARD / BCM)
 GPIO.setmode(GPIO.BCM)
  
-#set GPIO Pins
-GPIO_TRIGGER_LEFT = 23
-GPIO_ECHO_LEFT = 24
-GPIO_TRIGGER_RIGHT = 20
-GPIO_ECHO_RIGHT = 21
+#set GPIO Pins from node_helper config
+numbers = re.compile(r'\d+')
+gpio_numbers = numbers.findall(sys.argv[1])
+print(gpio_numbers[0])
+
+GPIO_TRIGGER_LEFT = int(gpio_numbers[0])
+GPIO_ECHO_LEFT = int(gpio_numbers[1])
+GPIO_TRIGGER_RIGHT = int(gpio_numbers[2])
+GPIO_ECHO_RIGHT = int(gpio_numbers[3])
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER_LEFT, GPIO.OUT)

@@ -7,12 +7,12 @@ module.exports = NodeHelper.create({
     start:function() {
 	console.log(this.consolePrefix + "Starting node_helper for module [" + this.name + "]");
 	this.initialized = false;
-	this.python_start();
+	
     },
     
     python_start: function() {
 	const self = this;
-	const pyshell = new PythonShell('modules/' + this.name +'/swiper.py', {mode: 'text', pythonOptions: ['-u']});
+	const pyshell = new PythonShell('modules/' + this.name +'/swiper.py', {mode: 'text', pythonOptions: ['-u'], args: [JSON.stringify(this.config)]});
 	
 	pyshell.on('message', function(message) {
 	    console.log(message)
@@ -23,7 +23,16 @@ module.exports = NodeHelper.create({
             console.log("[" + self.name + "] " + 'finished running...');
         });
     
-    }
+    },
+    
+    socketNotificationReceived: function(notification, payload) {
+        var self = this;
+        if (notification === 'CONFIG') {
+	    this.config = payload;
+	    }
+	this.python_start();
+	this.initialized = true;
+	}
     
     
 })
