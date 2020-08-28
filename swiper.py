@@ -11,7 +11,6 @@ GPIO.setmode(GPIO.BCM)
 #set GPIO Pins from node_helper config
 numbers = re.compile(r'\d+')
 gpio_numbers = numbers.findall(sys.argv[1])
-print(gpio_numbers[0])
 
 GPIO_TRIGGER_LEFT = int(gpio_numbers[0])
 GPIO_ECHO_LEFT = int(gpio_numbers[1])
@@ -29,10 +28,13 @@ def to_node(type, message):
         print(json.dumps({type: message}))
     except Exception:
         pass
+    
+    sys.stdout.flush()
+
 
 def get_distances():
     left = distance_left()
-    right = distance_right()
+    right = distance_right()    
     result = {
     "left": left,
     "right": right,
@@ -96,7 +98,7 @@ def distance_right():
 
 
 if __name__ == '__main__':
-    to_node("info", 'python script started')
+    to_node("info", 'Python script for MMM-Sam-Swipes has started')
     try:
         while True:
             get_distances()
