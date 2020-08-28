@@ -9,18 +9,23 @@ Module.register("MMM-Page-Pusher", {
     rightPinTrigger: 20,
     rightPinEcho: 21,
     debug: false,
-    threshold: 100,
-    distDiff: 1.25,
+    threshold: 20,
+    pirSensor: false,
   },
 
   start: function() {
-    console.log("PAGEPUSHERERRRRR")
     this.sendSocketNotification("CONFIG", this.config);
   },
     
   socketNotificationReceived: function(notification, payload) {
     this.sendNotification(notification, payload);
-    console.log("MMM-Page-Pusher: " + notficiation);
+  },
+  
+  //if pinSensor is true and user presence is detected, this will send notification to node_helper to start up the script again
+  notificationReceived: function(notification, payload) {
+    if(notification === "USER_PRESENCE" && payload && this.config["pirSensor"]) {
+      this.sendSocketNotification("MOTION_DETECTED");
+    }
   },
 
 
