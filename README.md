@@ -17,8 +17,8 @@ var config = {
         ...
         {
             module: "MMM-Page-Pusher",
-            config: 
-                leftPinTrigger: 23 
+            config: {
+                leftPinTrigger: 23, 
                 leftPinEcho: 24, 
                 rightPinTrigger: 20, 
                 rightPinEcho: 21, 
