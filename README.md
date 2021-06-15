@@ -9,6 +9,9 @@ Node helper gets the data from the sensors every second via a python script. Whe
 ### Future improvements
 - Right now it only switches between 2 pages (page 0 and 1), in future it should be able to switch to more pages. 
 
+### Dependencies
+- python-shell(https://www.npmjs.com/package/python-shell)
+
 ### MagicMirror² Example Configuration
 To use this module, add the following configuration block to the modules array in the config/config.js file:
 ```js
